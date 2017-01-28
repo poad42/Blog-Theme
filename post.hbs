@@ -1,0 +1,61 @@
+{{!< default}}
+
+{{#post}}
+<div class="material__posts mdl-grid">
+  {{! back button }}
+  <div class="post-back">
+    <a href="/" class="material-nav__button">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+        <i class="material-icons">arrow_back</i>
+        <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple is-animating" style="width: 92.5097px; height: 92.5097px; transform: translate(-50%, -50%) translate(14px, 19px);"></span>
+        </span>
+      </button>
+    </a>
+  </div>
+
+  <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__media mdl-color-text--grey-50" style="background: rgb(255,82,82) url('{{image absolute="true"}}') center / cover">
+      <h3>{{title}}</h3>
+    </div>
+    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+      <div class="minilogo">
+        {{#if author.image}}
+          <img src="{{author.image}}" alt="Author avatar" class="post_avatar" />
+        {{else}}
+          <img src="{{asset "img/avatar.png"}}" class="post_avatar" />
+        {{/if}}
+      </div>
+      <div>
+        <strong>{{author.name}}</strong>
+        <span>
+          <time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMMM YYYY"}}</time>
+        </span>
+      </div>
+      <div class="section-spacer"></div>
+      <div class="meta__favorites">{{tags prefix="Tags: " separator=" , "}}</div>
+      <button id="share-btn-post-{{title}}" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">share</i>
+      </button>
+
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="share-btn-post-{{title}}" style="z-index: 9999">
+        <li class="mdl-menu__item"><a href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url absolute="true"}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">Share on Twitter</a></li>
+        <li class="mdl-menu__item"><a href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">Share on Facebook</a></li>
+        <li class="mdl-menu__item"><a href="mailto:?subject={{title}}">Email link</a></li>
+      </ul>
+    </div>
+
+    {{! post content }}
+    <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+      {{content}}
+    </div>
+
+    {{! comment block }}
+    <div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments" style="width: initial;">
+      {{> "comments"}}
+    </div>
+  </div>
+</div>
+{{/post}}
+
+{{> "footer"}}

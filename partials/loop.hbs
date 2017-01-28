@@ -1,0 +1,37 @@
+{{#foreach posts}}
+<div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
+  <div class="mdl-card__media mdl-color-text--grey-50" style="background: rgb(255,82,82) url('{{image absolute="true"}}') center / cover">
+    <h3>
+      <a href="{{url}}">{{title}}</a>
+    </h3>
+  </div>
+  <div class="mdl-color-text--grey-600 mdl-card__supporting-text">
+    {{excerpt words="60"}}
+  </div>
+  <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+    <div class="minilogo">
+      {{#if author.image}}
+        <img src="{{author.image}}" alt="Author avatar" class="post_avatar" />
+      {{else}}
+        <img src="{{asset "img/avatar.png"}}" class="post_avatar" />
+      {{/if}}
+    </div>
+    <div>
+      <strong>{{author}}</strong>
+      <span><time datetime="{{date format="DD-MM-YYYY"}}">{{date published_at timeago="true"}}</time></span>
+    </div>
+
+    {{! share button menu }}
+    <div class="mdl-layout-spacer"></div>
+    <button id="share-btn-{{title}}" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">share</i>
+    </button>
+
+    <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect" for="share-btn-{{title}}" style="z-index: 9999">
+      <li class="mdl-menu__item"><a href="https://twitter.com/intent/tweet?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">Share on Twitter</a></li>
+      <li class="mdl-menu__item"><a href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">Share on Facebook</a></li>
+      <li class="mdl-menu__item"><a href="mailto:?subject={{title}}">Email link</a></li>
+    </ul>
+  </div>
+</div>
+{{/foreach}}
